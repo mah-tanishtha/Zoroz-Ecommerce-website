@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import Layout from './pages/Homepage';
+import {ProductProvider} from '../src/context/ProductProvider'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import ProductListing from './pages/ProductListing';
+import Checkout from './pages/CheckoutPage';
 
 function App() {
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ProductProvider>
+        {/* <Layout /> */}
+        <Router>
+          <Routes>
+            <Route path="/" element={<Layout/>}/>
+            <Route path="/productlist/:category" element={<ProductListing/>} />
+            <Route path="/checkout" element={<Checkout/>} />
+          </Routes>
+        </Router>
+      </ProductProvider>
+
+      {/* {
+        getAllProducts
+      } */}
     </div>
   );
 }
